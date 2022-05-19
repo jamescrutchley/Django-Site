@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p>Task</p>
+    <form id="taskform" method="POST" action="">
+        {% csrf_token %}
+        {{form}}
+        <input form="taskform" type="submit" name="submit" value="Update Task">
+    </form>
+
+    <ul id="subtasklist">
+        <p>subtasks:</p>
+        {% for subtask in task.subtask_set.all %}
+            <li>
+                <form id="subtaskform{{forloop.counter}}" action="{% url 'task:edit-subtask' subtask.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="item" value="{{task.id}}">
+                    Title: <input type="text" name="title" value="{{subtask}}">
+                    Completed: <input type="checkbox" name="completed">
+                    <input form="subtaskform{{forloop.counter}}" type="submit" value="Update">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <p id="newsubtask"></p>
+
+    <br>
+    <a href="{% url 'task:add-subtask' task.id %}">Add Subtask Form</a><br><br>
+    <button type="button" onclick="AddSubTask()">Add Subtask JavaScript</button>
+    {% include 'task/subtaskform.html %}
+
+    <script>
+        function AddSubTask() {
+            var taskBody = document.getElementById('addsubtaskformdiv')
+            taskBody.style.display = "block"
+        }
+    </script>
+
+    
+</body>
+</html>

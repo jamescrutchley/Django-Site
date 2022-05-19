@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for task in task_list %}
+        {{task}} <a href="{% url 'task:edit-task' task.id %}">Update Task</a><br>
+        <ul>
+            {% for subtask in task.subtask_set.all %}
+                <li>{{subtask}}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <a href="{% url 'task:add-task' %}">Add New Task</a>
+</body>
+</html>
