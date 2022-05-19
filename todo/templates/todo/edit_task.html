@@ -7,6 +7,9 @@
 </head>
 <body>
 
+    <h1>Edit Task</h1><br><br>
+
+
     <p>Task</p>
     <form id="taskform" method="POST" action="">
         {% csrf_token %}
@@ -18,7 +21,7 @@
         <p>subtasks:</p>
         {% for subtask in task.subtask_set.all %}
             <li>
-                <form id="subtaskform{{forloop.counter}}" action="{% url 'task:edit-subtask' subtask.id %}" method="POST">
+                <form id="subtaskform{{forloop.counter}}" action="{% url 'todo:edit-subtask' subtask.id %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="item" value="{{task.id}}">
                     Title: <input type="text" name="title" value="{{subtask}}">
@@ -31,11 +34,12 @@
     <p id="newsubtask"></p>
 
     <br>
-    <a href="{% url 'task:add-subtask' task.id %}">Add Subtask Form</a><br><br>
-    <button type="button" onclick="AddSubTask()">Add Subtask JavaScript</button>
-    {% include 'task/subtaskform.html %}
+    <a href="{% url 'todo:add-subtask' task.id %}">Add Subtask</a><br><br>
+    <button type="button" onclick="AddSubTask()">Add Subtask (JavaScript)</button>
+    {% include 'todo/subtaskform.html' %}
 
-    <script>
+    {% comment %} This is broken. {% endcomment %}
+    <script> 
         function AddSubTask() {
             var taskBody = document.getElementById('addsubtaskformdiv')
             taskBody.style.display = "block"

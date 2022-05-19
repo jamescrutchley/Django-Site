@@ -3,17 +3,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 <body>
+
+    <h1>Your To-Do List</h1><br><br>
+<ul>
     {% for task in task_list %}
-        {{task}} <a href="{% url 'task:edit-task' task.id %}">Update Task</a><br>
+    
+        <li>{{task}} <a href="{% url 'todo:edit-task' task.id %}"><i class="bi bi-wrench"></i></a><br></li>
         <ul>
             {% for subtask in task.subtask_set.all %}
                 <li>{{subtask}}</li>
             {% endfor %}
         </ul>
     {% endfor %}
-    <a href="{% url 'task:add-task' %}">Add New Task</a>
+</ul>
+    <a href="{% url 'todo:add-task' %}">Add New Task</a>
+
 </body>
 </html>
