@@ -18,7 +18,7 @@ def add_task(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/")
-        return render(request, "task/add_task.html", {'form':form,})
+    return render(request, "todo/add_task.html", {'form':form,})
 
 def edit_task(request,pk):
     task = Task.objects.get(pk=pk)
@@ -27,7 +27,7 @@ def edit_task(request,pk):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/")
-        return render(request, "task/edit_task.html", {'form':form, 'task':task,})
+    return render(request, "todo/edit_task.html", {'form':form, 'task':task,})
 
 def add_subtask(request,pk):
     task = Task.objects.get(pk=pk)
@@ -39,7 +39,7 @@ def add_subtask(request,pk):
             subtask.task = task
             form.save()
             return HttpResponseRedirect(f"/edit-task/{subtask.task.id}/")
-        return render(request, "task/add_subtask.html", {'form':form, 'task':task,}) 
+    return render(request, "todo/add_subtask.html", {'form':form, 'task':task,}) 
 
 
 def edit_subtask(request,pk):
@@ -51,6 +51,6 @@ def edit_subtask(request,pk):
         else:
             subtask.completed = False
         subtask.save()
-        return HttpResponseRedirect(f'/edit-task/{subtask.task.id}/')
+    return HttpResponseRedirect(f'/edit-task/{subtask.task.id}/')
 
         

@@ -6,9 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+
+    <h1>??</h1><br><br>
+
     <div id="addsubtaskformdiv" style="display: none;">
         <p>Add Subtask</p>
-        <form id='add-subtaskform' method="POST" action="{% url 'task:add-subtask' task.id %}">
+        <form id='add-subtaskform' method="POST" action="{% url 'todo:add-subtask' task.id %}">
             Title: <input type="text" name="title">
             Completed: <input type="checkbox" name="completed">
             <input type="add-subtaskform" type="submit" name="Add Subtask">
