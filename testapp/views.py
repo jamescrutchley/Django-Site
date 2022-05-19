@@ -7,4 +7,3 @@ def test_view(request):
 def to_do_view(request):
     return render(request,'todo.html')
 
-    
